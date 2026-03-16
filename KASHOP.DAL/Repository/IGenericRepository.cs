@@ -1,4 +1,6 @@
-﻿using KASHOP.DAL.Models;
+﻿using KASHOP.DAL.DTO.Request;
+using KASHOP.DAL.DTO.Response;
+using KASHOP.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,10 @@ namespace KASHOP.DAL.Repository
     {
         Task<List<T>> GetAllAsync(string[]? includes=null);
         Task<T> CreateAsync(T category);
-        Task<T> GetOne(Expression<Func<T, bool>> filter, string[]? includes = null);
-        
-        }
+        Task<T?> GetOne(Expression<Func<T, bool>> filter, string[]? includes = null);
+        Task<bool> DeleteAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+
+
+    }
 }

@@ -6,10 +6,13 @@ using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using KASHOP.PL.Resources;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 
 namespace KASHOP.PL.Controllers
 {
@@ -25,8 +28,10 @@ namespace KASHOP.PL.Controllers
             _categoryService = categoryService;
         }
         [HttpPost("")]
+        [Authorize]
         public async Task<IActionResult> Create(CategoryRequest request)
         {
+            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var response = await _categoryService.CreateCategory(request);
 
@@ -39,7 +44,7 @@ namespace KASHOP.PL.Controllers
         }
 
 
-        [HttpGet("")]
+        [HttpGet("")] 
         public async Task<IActionResult> Index()
         {
             var categories = await _categoryService.GetAllCategorries();
@@ -58,11 +63,34 @@ namespace KASHOP.PL.Controllers
         {
 
 
-            
-            return Ok(await _categoryService.GetCategory(c => c.Id == id) );
+
+           return Ok(await _categoryService.GetCategory(c => c.Id == id));
 
 
         }
+        [HttpDelete("{id}")]
+        [Authorize]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var delete = await _categoryService.DeleteCategory(id);
+            if (!delete)
+                return NotFound(new { message = _localizer["NotFound"].Value });
+
+            return Ok(new { message = _localizer["Success"].Value });
+
+        }
+
+        public async Task<IActionResult> Update(int id, CategoryRequest request)
+        {
+            var result = await _categoryService.UpdateCategory(id, request);
+            if (result is null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+
     }
 }
 

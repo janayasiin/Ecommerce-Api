@@ -7,9 +7,9 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.Genera
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.AssemblyInfoInputs.cache
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.AssemblyInfo.cs
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.csproj.CoreCompileInputs.cache
+C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.sourcelink.json
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\refint\KASHOP.DAL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.pdb
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.genruntimeconfig.cache
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\ref\KASHOP.DAL.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.DAL\obj\Debug\net9.0\KASHOP.DAL.sourcelink.json

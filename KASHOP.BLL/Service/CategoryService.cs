@@ -27,6 +27,15 @@ namespace KASHOP.BLL.Service
 
         }
 
+        public async Task<bool> DeleteCategory(int id)
+        {
+            var category = await _categoryRepository.GetOne(c => c.Id == id);
+            if (category == null) { return false; }
+                
+            
+            return await _categoryRepository.DeleteAsync(category);
+        }
+
         public   async Task<List<CategoryResponse>> GetAllCategorries()
         {
             var categories =  await _categoryRepository.GetAllAsync(new string[] { nameof(Category.Translations) });
@@ -34,8 +43,35 @@ namespace KASHOP.BLL.Service
         }
         public async Task<CategoryResponse> GetCategory(Expression<Func<Category, bool>> filter)
         {
-            var category = _categoryRepository.GetOne(filter, new string[] { nameof(Category.Translations) });
+            var category = await _categoryRepository.GetOne(filter, new string[] { nameof(Category.Translations) });
+            return  category.Adapt<CategoryResponse>();
+        }
+      
+
+        public async Task<CategoryResponse?> UpdateCategory(int id, CategoryRequest request)
+        {
+            var category = await _categoryRepository.GetOne(
+                c => c.Id == id,
+                new string[] { nameof(Category.Translations) }
+            );
+
+            if (category is null)
+                return null;
+
+            foreach (var t in category.Translations)
+            {
+                var req = request.Translations
+                    .FirstOrDefault(x => x.Language == t.Language);
+
+                if (req is not null)
+                    t.Name = req.Name;
+            }
+
+            await _categoryRepository.UpdateAsync(category);
+
             return category.Adapt<CategoryResponse>();
+
+
         }
     }
 }
