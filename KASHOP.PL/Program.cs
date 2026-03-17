@@ -29,6 +29,17 @@ namespace KASHOP.PL
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                                  });
+            });
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
@@ -100,9 +111,10 @@ namespace KASHOP.PL
             {
                 app.MapOpenApi();
             }
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

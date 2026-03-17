@@ -175,10 +175,11 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\staticwebassets.bu
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\staticwebassets.build.endpoints.json
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\swae.build.ex.cache
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.csproj.Up2Date
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\refint\KASHOP.PL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.pdb
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.genruntimeconfig.cache
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\ref\KASHOP.PL.dll
+C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\dotnet-tools.json
+C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\ar\KASHOP.PL.resources.cs
