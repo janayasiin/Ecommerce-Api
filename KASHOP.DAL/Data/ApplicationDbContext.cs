@@ -18,6 +18,13 @@ namespace KASHOP.DAL.Data
 
         public DbSet<Category> Categories {  get; set; }
         public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductTranslation> ProductTranslations { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<BrandTranslation> BrandTranslations { get; set; }
+
+
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options ,IHttpContextAccessor httpContextAccessor)
             : base(options)
@@ -31,32 +38,46 @@ namespace KASHOP.DAL.Data
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
 
+            builder.Entity<Category>().HasOne(p => p.CreatedBy).WithMany().HasForeignKey
+                (p => p.CreatedById).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Category>().HasOne(p => p.UpdatedBy).WithMany().HasForeignKey
+                (p => p.UpdatedById).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Product>().HasOne(p => p.CreatedBy).WithMany().HasForeignKey
+             (p => p.CreatedById).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Product>().HasOne(p => p.UpdatedBy).WithMany().HasForeignKey
+                (p => p.UpdatedById).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Brand>().HasOne(p => p.CreatedBy).WithMany().HasForeignKey
+         (p => p.CreatedById).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Brand>().HasOne(p => p.UpdatedBy).WithMany().HasForeignKey
+                (p => p.UpdatedById).OnDelete(DeleteBehavior.Restrict);
+
+
+
 
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
-            if (_httpContextAccessor != null)
+            var entries = ChangeTracker.Entries<AuditableEntity>();
+
+            var currentUserId = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            foreach (var entry in entries)
             {
-                var entries = ChangeTracker.Entries<AuditableEntity>();
-                var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                foreach (var entry in entries)
+                if (entry.State == EntityState.Added)
                 {
+                    entry.Property(x => x.CreatedById).CurrentValue = currentUserId;
+                    entry.Property(x => x.CreatedOn).CurrentValue = DateTime.Now;
+                }
 
-                    if (entry.State == EntityState.Added)
-                    {
-                        entry.Property(x => x.CreatedById).CurrentValue = currentUserId;
-
-                        entry.Property(x => x.CreatedOn).CurrentValue = DateTime.Now;
-
-                    }
-                    if (entry.State == EntityState.Modified)
-                    {
-                        entry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
-
-                        entry.Property(x => x.UpdatedOn).CurrentValue = DateTime.Now;
-
-                    }
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
+                    entry.Property(x => x.UpdatedOn).CurrentValue = DateTime.Now;
                 }
             }
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);

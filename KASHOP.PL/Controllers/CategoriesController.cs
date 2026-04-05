@@ -80,7 +80,8 @@ namespace KASHOP.PL.Controllers
             return Ok(new { message = _localizer["Success"].Value });
 
         }
-
+        [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Update(int id, CategoryRequest request)
         {
             var result = await _categoryService.UpdateCategory(id, request);

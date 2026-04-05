@@ -12,8 +12,8 @@ namespace KASHOP.BLL.Service
 {
     public interface ICategoryService
     {
-        Task<List<CategoryResponse>> GetAllCategorries( );
-        Task<CategoryResponse> CreateCategory(CategoryRequest request);
+        Task<List<CategoryResponse>> GetAllCategorries();
+            Task<CategoryResponse> CreateCategory(CategoryRequest request);
         Task<CategoryResponse> GetCategory(Expression<Func<Category, bool>> filter);
         Task<bool> DeleteCategory(int id);
         Task<CategoryResponse?> UpdateCategory(int id, CategoryRequest request);

@@ -1,4 +1,5 @@
 
+using KASHOP.BLL.Mapping;
 using KASHOP.BLL.Service;
 using KASHOP.DAL.Data;
 using KASHOP.DAL.Models;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +44,7 @@ namespace KASHOP.PL
             });
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddLocalization(options => options.ResourcesPath = "");
             const string defaultCulture = "en";
@@ -73,9 +75,33 @@ namespace KASHOP.PL
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<ISeedData, RoleSeedData>();
             builder.Services.AddTransient<IEmailSender ,EmailSender>();
+            builder.Services.AddScoped<IFileService,FileService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+            builder.Services.AddScoped<IBrandService, BrandService>();
+
+
+
+
+            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( 
-                options =>{ options.User.RequireUniqueEmail = true; }) 
+                options =>{
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequiredLength = 10;
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                
+                
+                
+                
+                
+                }) 
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
   
@@ -100,6 +126,8 @@ namespace KASHOP.PL
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
                         };
                     });
+            builder.Services.AddAuthorization();
+            MapsterConfig.MapsterConfigRegister();
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -107,16 +135,17 @@ namespace KASHOP.PL
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+           
+
                 app.MapOpenApi();
-            }
+            app.MapScalarApiReference();
+
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseStaticFiles();   
 
             app.MapControllers();
             using (var scope = app.Services.CreateScope())
@@ -125,9 +154,15 @@ namespace KASHOP.PL
                 var seeders =services.GetServices<ISeedData>();
                 foreach (var seeder in seeders) 
                     {
-                    await seeder.DataSeed();
-
+                    try
+                    {
+                        await seeder.DataSeed();
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
 
             }
             app.Run();
