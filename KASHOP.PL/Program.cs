@@ -5,9 +5,12 @@ using KASHOP.DAL.Data;
 using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using KASHOP.DAL.utils;
+using KASHOP.PL.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +20,7 @@ using Scalar.AspNetCore;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace KASHOP.PL
 {
@@ -31,116 +35,34 @@ namespace KASHOP.PL
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  policy =>
-                                  {
-                                      policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                                  });
-            });
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddLocalization(options => options.ResourcesPath = "");
-            const string defaultCulture = "en";
-
-            var supportedCultures = new[] {
-
-
-    new CultureInfo(defaultCulture),
-    new CultureInfo("ar") };
-
-
-            builder.Services.Configure<RequestLocalizationOptions>(options =>
-            {
-                options.DefaultRequestCulture = new RequestCulture(defaultCulture);
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
-                options.RequestCultureProviders.Clear();
-                //options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider
-                //{
-                //    QueryStringKey = "lang"
-                //});
-                options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
-
-
-            });
-            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-            builder.Services.AddScoped<ISeedData, RoleSeedData>();
-            builder.Services.AddTransient<IEmailSender ,EmailSender>();
-            builder.Services.AddScoped<IFileService,FileService>();
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            builder.Services.AddScoped<IBrandRepository, BrandRepository>();
-            builder.Services.AddScoped<IBrandService, BrandService>();
-
+         
+         
+         
 
 
 
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDatabaseServices(builder.Configuration);
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>( 
-                options =>{
-                    options.User.RequireUniqueEmail = true;
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-                    options.Password.RequiredLength = 10;
-                    options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                
-                
-                
-                
-                
-                }) 
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddIdentityServices();
+            builder.Services.AddAuthenticationServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
+            builder.Services.AddLocalizationServices();
 
-  
+            builder.Services.AddCorsPolicyServices();
 
-
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-
-                    .AddJwtBearer(options =>
-                    {
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                            ValidAudience = builder.Configuration["Jwt:Audience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
-                        };
-                    });
-            builder.Services.AddAuthorization();
             MapsterConfig.MapsterConfigRegister();
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 
-
-            // Configure the HTTP request pipeline.
            
 
                 app.MapOpenApi();
             app.MapScalarApiReference();
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(CorsPolicyExtensions.PolicyName);
 
             app.UseHttpsRedirection();
             app.UseAuthentication();

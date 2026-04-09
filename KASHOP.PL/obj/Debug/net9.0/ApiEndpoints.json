@@ -148,6 +148,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KASHOP.PL.Controllers.CartsController",
+    "Method": "Create",
+    "RelativePath": "api/Carts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KASHOP.DAL.DTO.Request.AddtoCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KASHOP.PL.Controllers.CategoriesController",
     "Method": "Create",
     "RelativePath": "api/Categories",
