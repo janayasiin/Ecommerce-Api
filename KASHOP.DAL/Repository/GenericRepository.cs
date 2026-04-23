@@ -35,6 +35,12 @@ namespace KASHOP.DAL.Repository
             return affected > 0;
         }
 
+        public async Task<bool> DeleteRangeAsync(List<T> entities)
+        {
+            _context.RemoveRange(entities);
+            return await _context.SaveChangesAsync()>0;
+        }
+
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter=null, string[]? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
@@ -72,6 +78,14 @@ namespace KASHOP.DAL.Repository
              var affected =await _context.SaveChangesAsync();
           
             return affected>0;
+        }
+
+        public async Task<bool> UpdateRangeAsync(List<T> entities)
+        {
+            _context.UpdateRange(entities);
+            return await _context.SaveChangesAsync()>0;
+
+
         }
     }
 }

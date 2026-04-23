@@ -164,6 +164,53 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KASHOP.PL.Controllers.CartsController",
+    "Method": "GetCart",
+    "RelativePath": "api/Carts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KASHOP.PL.Controllers.CartsController",
+    "Method": "DeleteCart",
+    "RelativePath": "api/Carts/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KASHOP.PL.Controllers.CartsController",
+    "Method": "UpdateQuantity",
+    "RelativePath": "api/Carts/{productId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "KASHOP.DAL.Request.UpdateCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KASHOP.PL.Controllers.CategoriesController",
     "Method": "Create",
     "RelativePath": "api/Categories",
@@ -238,6 +285,38 @@
         "Name": "request",
         "Type": "KASHOP.DAL.DTO.Request.CategoryRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KASHOP.PL.Controllers.CheckoutsController",
+    "Method": "Payment",
+    "RelativePath": "api/Checkouts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KASHOP.BLL.Service.CheckoutRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KASHOP.PL.Controllers.CheckoutsController",
+    "Method": "success",
+    "RelativePath": "api/Checkouts/success",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sessionId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

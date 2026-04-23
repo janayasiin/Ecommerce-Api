@@ -66,7 +66,6 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.Identity
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Mono.TextTemplating.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Scalar.AspNetCore.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.ClientModel.dll
@@ -77,15 +76,10 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Composition
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Composition.Runtime.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Composition.TypedParts.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Drawing.Common.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Formats.Asn1.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Memory.Data.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Runtime.Caching.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Security.Permissions.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Text.Json.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\System.Windows.Extensions.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -157,12 +151,7 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win-arm\n
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\KASHOP.BLL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\KASHOP.DAL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\KASHOP.BLL.pdb
@@ -185,3 +174,5 @@ C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.pdb
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.genruntimeconfig.cache
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\ref\KASHOP.PL.dll
 C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\obj\Debug\net9.0\KASHOP.PL.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\HITECH\Desktop\api\KASHOP\KASHOP.PL\bin\Debug\net9.0\Stripe.net.dll
