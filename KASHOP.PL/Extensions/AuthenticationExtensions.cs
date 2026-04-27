@@ -20,6 +20,7 @@ namespace KASHOP.PL.Extensions
                            ValidateIssuer = true,
                            ValidateAudience = true,
                            ValidateLifetime = true,
+                           ClockSkew=TimeSpan.Zero,
                            ValidateIssuerSigningKey = true,
                            ValidIssuer = Configuration["Jwt:Issuer"],
                            ValidAudience = Configuration["Jwt:Audience"],

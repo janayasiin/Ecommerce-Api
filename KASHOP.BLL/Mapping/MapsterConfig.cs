@@ -2,6 +2,7 @@
 using KASHOP.DAL.DTO.Response;
 using KASHOP.DAL.Models;
 using Mapster;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,15 +22,17 @@ namespace KASHOP.BLL.Mapping
                 source => source.CreatedBy.UserName).Map(dest => dest.Name, source => source.
                 Translations.Where(t => t.Language == CultureInfo.CurrentCulture.Name).Select(t => t.Name).FirstOrDefault());
 
-         
 
-            TypeAdapterConfig<Product, ProductResponse>.NewConfig().
+
+            TypeAdapterConfig<DAL.Models.Product, ProductResponse>.NewConfig().
               Map(dest => dest.UserCreated,
               source => source.CreatedBy.UserName).Map(dest => dest.Name, source => source.
-              Translations.Where(t => t.Language == CultureInfo.CurrentCulture.Name).Select(t => t.Name).FirstOrDefault()).Map(dest=>dest.MainImage, source
-              =>$"https://localhost:7175/images/{source.MainImage}");
+              Translations.Where(t => t.Language == CultureInfo.CurrentCulture.Name).Select(t => t.Name).FirstOrDefault()).Map(dest => dest.MainImage, source
+              => $"https://localhost:7175/images/{source.MainImage}").
+              Map(dest => dest.SubImages, src => src.Images.Select(i => $"https://localhost:7175/images/{i.ImagePath}"));
+            
 
-            TypeAdapterConfig<ProductUpdateRequest, Product>.NewConfig().IgnoreNullValues(true);
+            TypeAdapterConfig<ProductUpdateRequest, DAL.Models.Product>.NewConfig().IgnoreNullValues(true);
 
             TypeAdapterConfig<Brand, BrandResponse>.NewConfig().
               Map(dest => dest.UserCreated,
