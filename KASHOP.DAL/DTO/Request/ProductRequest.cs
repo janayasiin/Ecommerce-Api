@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KASHOP.DAL.Validations;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace KASHOP.DAL.DTO.Request
     {
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
+        [AllowedExtensions]
+        [MaxFileSize(2)]
         public IFormFile MainImage { get; set; }
         public List<IFormFile>? SubImages { get; set; }
         public int Quantity { get; set; }

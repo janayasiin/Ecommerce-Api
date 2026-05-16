@@ -6,6 +6,7 @@ using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
 using KASHOP.DAL.utils;
 using KASHOP.PL.Extensions;
+using KASHOP.PL.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -67,9 +68,10 @@ namespace KASHOP.PL
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseStaticFiles();   
-
+            app.UseStaticFiles();
             app.MapControllers();
+
+            app.UsecUSTOMmIDDLEWARE();
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;

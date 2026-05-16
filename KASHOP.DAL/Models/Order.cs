@@ -11,9 +11,11 @@ namespace KASHOP.DAL.Models
     {
         Pending =1 ,
         Approved =2 ,
+        Shipped=3 ,
         Delivered=4 ,
-        Cancellled =5 ,
-        Paid=6
+        Paid = 5,
+        Cancellled =6 ,
+        
     }
     public class Order
     {

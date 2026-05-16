@@ -25,9 +25,9 @@ namespace KASHOP.PL.Controllers
 
         [HttpGet("")]
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] PaginationRequest request)
         {
-            var products =await _productService.GetAllProductsAsync();
+            var products =await _productService.GetAllProductsAsync(request);
             return Ok (new {data = products });
         }
 

@@ -45,6 +45,13 @@ namespace KASHOP.BLL.Service
             }
             if (!await _userManager.IsEmailConfirmedAsync(user)) {
                 return new LoginResponse() { Success = false, Message = "email is not confirmed" };
+
+            }
+            if (await _userManager.IsLockedOutAsync(user)) {
+                return new LoginResponse() { Success = false, Message = "account is blocked" };
+
+
+
             }
             var result = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!result)
@@ -53,6 +60,9 @@ namespace KASHOP.BLL.Service
             var refreshToken = await GenerateRefreshToken(user);
             SetRefreshTokenCookies(refreshToken);
             return new LoginResponse() { Success = true, Message = "Success", AccessToken = await GenerateAccessToken(user) };
+
+
+           
 
 
         }
@@ -70,7 +80,7 @@ namespace KASHOP.BLL.Service
        issuer: _configuration["Jwt:Issuer"],
        audience: _configuration["Jwt:Audience"],
        claims: userCLaims,
-       expires: DateTime.Now.AddMinutes(1),
+       expires: DateTime.Now.AddDays(5),
        signingCredentials: credentials
        );
 
@@ -81,7 +91,7 @@ namespace KASHOP.BLL.Service
         {
             var refreshtoken = Guid.NewGuid().ToString();
             user.RefreshToken = refreshtoken;
-            user.RefreshTokenExpiry = DateTime.UtcNow.AddMinutes(1);
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(1);
             await _userManager.UpdateAsync(user);
             return refreshtoken;
         }

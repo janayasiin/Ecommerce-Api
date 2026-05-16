@@ -1,4 +1,5 @@
-﻿using KASHOP.DAL.DTO.Request;
+﻿using Azure.Core;
+using KASHOP.DAL.DTO.Request;
 using KASHOP.DAL.DTO.Response;
 using KASHOP.DAL.Models;
 using KASHOP.DAL.Repository;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
+using KASHOP.BLL.Extensions;
 namespace KASHOP.BLL.Service
 {
     public class ProductService : IProductService
@@ -43,15 +44,22 @@ namespace KASHOP.BLL.Service
             }
             await _productRepository.CreateAsync(product);
         }
-        public async Task<List<ProductResponse>> GetAllProductsAsync()
+        public async Task<PaginationResponse<ProductResponse>> GetAllProductsAsync(PaginationRequest request)
         {
 
-            var products = await _productRepository.GetAllAsync(p => p.Status == EntityStatus.Active, new string[]
+            var query = _productRepository.GetQueryable(p => p.Status == EntityStatus.Active, new string[]
             {
             nameof(Product.Translations) , nameof(Product.CreatedBy) , "Images"
             });
+            var paginated= await query.ToPaginationAsync(request.Page , request.Limit);
 
-            return products.Adapt<List<ProductResponse>>();
+            return new PaginationResponse<ProductResponse>
+            {
+                Data = paginated.Data.Adapt<List<ProductResponse>>(),
+                TotalCount = paginated.TotalCount,
+                Page = paginated.Page,
+                Limit = paginated.Limit
+            };
 
 
 

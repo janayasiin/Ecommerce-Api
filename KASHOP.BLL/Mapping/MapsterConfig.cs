@@ -45,6 +45,9 @@ namespace KASHOP.BLL.Mapping
                 ).Map(dest=>dest.ProductImage, source
               => $"https://localhost:7175/images/{source.Product.MainImage}");
 
+
+            TypeAdapterConfig<OrderItem, OrderItemResponse>.NewConfig().Map(dest => dest.ProductName, source => source.Product.Translations.Where(
+                t => t.Language == CultureInfo.CurrentCulture.Name).Select(t => t.Name).FirstOrDefault());
         }
     }
 }
