@@ -70,7 +70,7 @@ namespace KASHOP.PL
             app.UseAuthorization();
             app.UseStaticFiles();
             app.MapControllers();
-
+            app.UseMiddleware<GlobalExceptionHandling>();
             app.UsecUSTOMmIDDLEWARE();
             using (var scope = app.Services.CreateScope())
             {
