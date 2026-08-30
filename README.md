@@ -1,4 +1,4 @@
-# KASHOP – E-Commerce API
+# E-Commerce API
 
 A scalable e-commerce backend API built with **ASP.NET Core** for managing products, orders, users, and core e-commerce operations.
 
@@ -17,7 +17,7 @@ A scalable e-commerce backend API built with **ASP.NET Core** for managing produ
 
 ## ✨ Features
 
-* User registration and authentication
+* User registration, login, and **user management**
 * JWT-based authentication and authorization
 * Role-based access control
 * Product and product image management
@@ -26,13 +26,14 @@ A scalable e-commerce backend API built with **ASP.NET Core** for managing produ
 * Pagination
 * AR/EN localization
 * Stripe payment integration
+* Idempotency handling for orders
 
 ## 🏗️ Architecture
 
 The project follows a structured **N-Tier Architecture** with separation of concerns:
 
 * API / Controllers
-* Services
+* Business Logic / Services
 * Repositories
 * Data Access
 * Models & DTOs
